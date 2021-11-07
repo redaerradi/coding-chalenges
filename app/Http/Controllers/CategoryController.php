@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use App\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $category;
+
+    public function __construct(CategoryRepository $category)
+    {
+         $this->category = $category;
+    }
+
     public function index()
     {
-        //
+        $categories = $this->category->all();
+        return view('Category.index' , compact('categories'));
     }
 
     /**
@@ -24,7 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = $this->category->all();
+        return view('Category.create' , compact('categories'));
     }
 
     /**
@@ -35,7 +40,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required',
+
+
+        ]);
+
+        $this->category->store($request->all());
+
+        return redirect()->back()->with('success', 'success');
     }
 
     /**
@@ -55,9 +69,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category = $this->category->get($id);
+        $categories = $this->category->all();
+        return view('Category.edit' , compact('category' , 'categories'));
     }
 
     /**
@@ -67,9 +83,17 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request,$id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required',
+
+
+        ]);
+        $this->category->update($id , $request->all());
+
+        return redirect()->back()->with('success', 'success');
     }
 
     /**
@@ -78,8 +102,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        $this->category->delete($id);
+        return back();
     }
 }

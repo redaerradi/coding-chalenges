@@ -1,0 +1,52 @@
+/*-------------------------for all*/
+
+a:hover {
+    text-decoration: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.sirail-logo {
+    width: 100%;
+}
+
+.btn-sirail {
+    background-color: #2B569A !important;
+    color: white;
+}
+
+.bg-sirail {
+    background-color: #2B569A !important;
+    color: white;
+}
+
+.alert-sirail {
+    background-color: #2B569A !important;
+    color: white;
+}
+
+.text-sirail {
+    color: #2B569A;
+}
+
+.border-sirail {
+    border-color: #2B569A !important;
+}
+
+.pagination {
+    flex-wrap: wrap;
+}
+
+.page-item.active .page-link {
+    z-index: 0;
+    color: white;
+    background-color: #00569F;
+    border-color: #00569F;
+}
+
+.page-item .page-link {
+    color: #00569F;
+    padding: .25rem .5rem;
+}

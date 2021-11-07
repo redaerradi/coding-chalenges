@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::delete('category/destroy', 'CategoryController@destroy');
+Route::delete('product/destroy', 'ProductController@destroy');
+
+Route::resource('product', 'ProductController');
+Route::resource('category', 'CategoryController');
