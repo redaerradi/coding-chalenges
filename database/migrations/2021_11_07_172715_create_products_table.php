@@ -15,6 +15,12 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('discription');
+            $table->float('price' , 8 , 2 );
+            $table->mediumText('image');
+            $table->unsignedBigInteger('categorie');
+            $table->foreign('categorie')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
